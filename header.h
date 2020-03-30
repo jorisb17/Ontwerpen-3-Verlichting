@@ -7,26 +7,25 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
-#include <avr/interrupt.h
+#include <avr/interrupt.h>
 #include "nrf24spiXM2.h"
 #include "nrf24L01.h"
 
 // Prototypes
 void init(void);
 static void init_pwm(void);
-void dimLamp(float percentage);
+void dim_lamp(float percentage);
 static void init_adc(void);
 static void init_nrf(void);
 uint16_t read_sensor(void);
-void setState(void);
-void runState(void);
-void cycle(void);
-void lampWithPot(void);
-void lampWithSensor();
+void set_state(void);
+void run_state(void);
+void lamp_with_pot(void);
+void lamp_with_sensor();
 uint8_t map(long x, long in_min, long in_max, long out_min, long out_max);
-void lampOn(void);
-void lampOff(void);
-uint16_t averagePot(void);
+void lamp_on(void);
+void lamp_off(void);
+uint16_t average_pot(void);
 uint16_t read_pot(void);
 uint16_t read_sensor(void);
 

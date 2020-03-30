@@ -39,8 +39,7 @@ SUBDIRS :=
 C_SRCS +=  \
 ../main.c \
 ../nrf24L01.c \
-../nrf24spiXM2.c \
-../serialF0.c
+../nrf24spiXM2.c
 
 
 PREPROCESSING_SRCS += 
@@ -52,30 +51,26 @@ ASM_SRCS +=
 OBJS +=  \
 main.o \
 nrf24L01.o \
-nrf24spiXM2.o \
-serialF0.o
+nrf24spiXM2.o
 
 OBJS_AS_ARGS +=  \
 main.o \
 nrf24L01.o \
-nrf24spiXM2.o \
-serialF0.o
+nrf24spiXM2.o
 
 C_DEPS +=  \
 main.d \
 nrf24L01.d \
-nrf24spiXM2.d \
-serialF0.d
+nrf24spiXM2.d
 
 C_DEPS_AS_ARGS +=  \
 main.d \
 nrf24L01.d \
-nrf24spiXM2.d \
-serialF0.d
+nrf24spiXM2.d
 
-OUTPUT_FILE_PATH +=Lamp_test_1.elf
+OUTPUT_FILE_PATH +=Verlichting.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +=Lamp_test_1.elf
+OUTPUT_FILE_PATH_AS_ARGS +=Verlichting.elf
 
 ADDITIONAL_DEPENDENCIES:=
 
@@ -108,13 +103,6 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
-./serialF0.o: .././serialF0.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega256a3u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega256a3u" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
 
 
 
@@ -141,13 +129,13 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR/GNU Linker : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="Lamp_test_1.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atxmega256a3u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega256a3u"  
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="Verlichting.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atxmega256a3u -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAA_DFP\1.1.68\gcc\dev\atxmega256a3u"  
 	@echo Finished building target: $@
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "Lamp_test_1.elf" "Lamp_test_1.hex"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "Lamp_test_1.elf" "Lamp_test_1.eep" || exit 0
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "Lamp_test_1.elf" > "Lamp_test_1.lss"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "Lamp_test_1.elf" "Lamp_test_1.srec"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "Lamp_test_1.elf"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "Verlichting.elf" "Verlichting.hex"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "Verlichting.elf" "Verlichting.eep" || exit 0
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "Verlichting.elf" > "Verlichting.lss"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "Verlichting.elf" "Verlichting.srec"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "Verlichting.elf"
 	
 	
 
@@ -159,5 +147,5 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "Lamp_test_1.elf" "Lamp_test_1.a" "Lamp_test_1.hex" "Lamp_test_1.lss" "Lamp_test_1.eep" "Lamp_test_1.map" "Lamp_test_1.srec" "Lamp_test_1.usersignatures"
+	rm -rf "Verlichting.elf" "Verlichting.a" "Verlichting.hex" "Verlichting.lss" "Verlichting.eep" "Verlichting.map" "Verlichting.srec" "Verlichting.usersignatures"
 	

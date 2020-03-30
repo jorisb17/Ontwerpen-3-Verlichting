@@ -25,7 +25,7 @@ int main(void)
 	init();
 	while (1) 
 	{
-		setState();
+		set_state();
 	}    
 }
 
@@ -33,7 +33,7 @@ int main(void)
 *
 * \return				void
 */
-void setState()
+void set_state(void)
 {
 	if(PORTB.IN & PIN2_bm)
 	{
@@ -51,28 +51,28 @@ void setState()
 	{
 		state = 4;
 	}
-	runState();
+	run_state();
 }
 
 /*!Brief execute functions according to state
 *
 * \return				void
 */
-void runState()
+void run_state(void)
 {
 	switch(state)
 	{
 		case 1:
-			lampWithSensor();
+			lamp_with_sensor();
 			break;
 		case 2:
-			lampWithPot();
+			lamp_with_pot();
 			break;
 		case 3:
-			lampOn();
+			lamp_on();
 			break;
 		case 4:
-			lampOff();
+			lamp_off();
 			break;
 		default:
 			break;
@@ -83,7 +83,7 @@ void runState()
 *
 * \return				void
 */
-void lampOn(void)
+void lamp_on(void)
 {
 	TCD0.CCA = 9999;
 }
@@ -92,7 +92,7 @@ void lampOn(void)
 *
 * \return				void
 */
-void lampOff(void)
+void lamp_off(void)
 {
 	TCD0.CCA = 0;
 }
@@ -101,7 +101,7 @@ void lampOff(void)
 *
 * \return				void
 */
-uint16_t averagePot(void)
+uint16_t average_pot(void)
 {
 	uint16_t value = read_pot();
 	uint16_t sum = 0;
@@ -126,9 +126,9 @@ uint16_t averagePot(void)
 *
 * \return				void
 */
-void lampWithPot(void)
+void lamp_with_pot(void)
 {
-	uint16_t value = averagePot();
+	uint16_t value = average_pot();
 	TCD0.CCA = map(value, 0, 4095, 0 , 9999);
 }
 
@@ -136,7 +136,7 @@ void lampWithPot(void)
 *
 * \return				void
 */
-void lampWithSensor()
+void lamp_with_sensor()
 {
 	int value = read_sensor();
 	if(value < BOUND - UPPER){

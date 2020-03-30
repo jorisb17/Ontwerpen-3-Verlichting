@@ -8,5 +8,3 @@ nrf24L01.c
 
 nrf24spiXM2.c
 
-serialF0.c
-
